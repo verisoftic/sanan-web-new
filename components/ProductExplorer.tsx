@@ -3,9 +3,8 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { ProductCard } from "./ProductCard";
-import { SpecModal } from "./SpecModal";
 import { Icon } from "./Icon";
-import { categories, products, type Product, type ProductCategory } from "@/lib/products";
+import { categories, products, type ProductCategory } from "@/lib/products";
 
 export function ProductExplorer({
   withSearch = false,
@@ -16,7 +15,6 @@ export function ProductExplorer({
 }) {
   const [active, setActive] = useState<"all" | ProductCategory>("all");
   const [query, setQuery] = useState("");
-  const [selected, setSelected] = useState<Product | null>(null);
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
@@ -84,12 +82,7 @@ export function ProductExplorer({
         <motion.div layout className="grid grid-cols-1 gap-space-lg sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {filtered.map((p) => (
-              <ProductCard
-                key={p.slug}
-                product={p}
-                onOpenSpec={setSelected}
-                useCatalogImage={useCatalogImage}
-              />
+              <ProductCard key={p.slug} product={p} useCatalogImage={useCatalogImage} />
             ))}
           </AnimatePresence>
         </motion.div>
@@ -103,8 +96,6 @@ export function ProductExplorer({
           </p>
         </div>
       )}
-
-      <SpecModal product={selected} onClose={() => setSelected(null)} />
     </div>
   );
 }

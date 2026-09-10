@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="259" height="259" viewBox="0 0 259 259">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="0.97" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#30424c"/>
+      <stop offset="1" stop-color="#025e7a"/>
+    </linearGradient>
+    <clipPath id="clip-smlogo-mark">
+      <rect width="259" height="259"/>
+    </clipPath>
+  </defs>
+  <g id="smlogo-mark" clip-path="url(#clip-smlogo-mark)">
+    <g id="SM-logo" transform="translate(-1207.103 -8328.464)">
+      <g id="Group_10946" data-name="Group 10946" transform="translate(189 -230)">
+        <path id="Subtraction_234" data-name="Subtraction 234" d="M130.9,218.573h0L10.83,169.761l118.209,36.453.648.2V13.552l-.646.2L10.157,50.149,130.9.537,265.5,51.566V168.842L130.9,218.573Zm21.9-186.7V186.386l17.186-7.108V62.034l19.418,7.115v102.1l18.86-7.8V77.969l18.142,5.692v72.282L245,148.255V69.149Z" transform="translate(1009 8577.927)" fill="url(#linear-gradient)"/>
+        <path id="Path_8806" data-name="Path 8806" d="M1057.486,8593.063l23.618-.569.569-54.351L976.1,8579.4v57.48l81.383,1.708v38.984l-54.351-19.92H976.1v12.521l105,41.546v-97.318H1000.29v-19.635l57.2-22.48Z" transform="translate(42 63.117)" fill="url(#linear-gradient)"/>
+      </g>
+    </g>
+  </g>
+</svg>

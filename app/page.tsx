@@ -4,6 +4,7 @@ import { Hero } from "@/components/Hero";
 import { Icon } from "@/components/Icon";
 import { ProductExplorer } from "@/components/ProductExplorer";
 import { StatCounter } from "@/components/StatCounter";
+import { GlobalReach } from "@/components/GlobalReach";
 import { AnimatedHeading, Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { facts, pillars } from "@/lib/site";
 
@@ -144,6 +145,9 @@ export default function HomePage() {
           </Reveal>
         </div>
       </section>
+
+      {/* Global reach */}
+      <GlobalReach />
 
       {/* Quality pillars */}
       <section className="bg-surface">

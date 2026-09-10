@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Logo } from "./Logo";
 import { Icon } from "./Icon";
-import { nav } from "@/lib/site";
+import { nav, primaryNav } from "@/lib/site";
 
 export function Header() {
   const pathname = usePathname();
@@ -47,7 +47,7 @@ export function Header() {
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-1 lg:flex">
-          {nav.map((item) => {
+          {primaryNav.map((item) => {
             const active =
               item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
             return (

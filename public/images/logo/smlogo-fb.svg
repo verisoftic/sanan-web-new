@@ -4,12 +4,11 @@
       <stop offset="0" stop-color="#30424c"/>
       <stop offset="1" stop-color="#025e7a"/>
     </linearGradient>
-    <clipPath id="clip-smlogo-favicon">
+    <clipPath id="clip-smlogo-fb">
       <rect width="256" height="256"/>
     </clipPath>
   </defs>
-  <g id="smlogo-favicon" clip-path="url(#clip-smlogo-favicon)">
-    <circle id="Ellipse_212" data-name="Ellipse 212" cx="127" cy="127" r="127" transform="translate(1 1)" fill="#fff"/>
+  <g id="smlogo-fb" clip-path="url(#clip-smlogo-fb)">
     <g id="SM-logo" transform="translate(-1187.103 -8312.464)">
       <g id="Group_10946" data-name="Group 10946" transform="translate(1207.103 8348.464)">
         <path id="Subtraction_234" data-name="Subtraction 234" d="M101.387,183.08h0L.565,142.093,99.822,172.7l.544.168V10.928l-.543.166L0,41.658,101.386,0l113.02,42.847v98.474L101.388,183.08ZM119.779,26.31V156.053l14.431-5.969V51.638l16.305,5.974V143.34l15.837-6.55V65.017L181.585,69.8V130.49l15.608-6.455V57.612Z" transform="translate(0.885 0)" fill="url(#linear-gradient)"/>

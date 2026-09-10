@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { StatCounter } from "@/components/StatCounter";
 import { AnimatedHeading, Reveal, Stagger, StaggerItem } from "@/components/motion";
-import { pillars } from "@/lib/site";
+import { certifications, company, pillars } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -19,36 +19,28 @@ const stats = [
   { value: 6, suffix: "", label: "Core Product Lines" },
 ];
 
+// DUMMY milestone years — replace with the real timeline before launch.
 const timeline = [
   {
-    year: "Foundation",
+    year: "2015",
     title: "Built on Clinical Trust",
     body: "Sanan Manufacturing was established to supply hospitals and blood banks with locally manufactured, globally compliant medical consumables.",
   },
   {
-    year: "Cleanroom",
+    year: "2017",
     title: "Class 10,000 Facility",
     body: "A 120,000 sq.ft positive-pressure cleanroom in Gadoon Industrial Estate, Swabi, with laminar airflow and automated injection molding.",
   },
   {
-    year: "Certification",
+    year: "2019",
     title: "ISO 13485 & GMP",
     body: "Full quality-management certification with ISO 10993 biocompatibility evaluation and validated EO / gamma sterilization cycles.",
   },
   {
-    year: "Scale",
+    year: "2023",
     title: "Institutional Supply",
     body: "Serving teaching hospitals, provincial health departments, and distribution partners through direct procurement and OEM programs.",
   },
-];
-
-const certs = [
-  { code: "ISO 13485:2016", label: "Medical Device QMS" },
-  { code: "ISO 9001", label: "Quality Management" },
-  { code: "ISO 10993", label: "Biocompatibility" },
-  { code: "GMP", label: "Good Manufacturing Practice" },
-  { code: "CE-Ready", label: "EU Conformity Pathway" },
-  { code: "DRAP", label: "Pakistan Registered" },
 ];
 
 export default function AboutPage() {
@@ -79,6 +71,19 @@ export default function AboutPage() {
                 surgical precision, uncompromising hygiene, and batch-tested reliability at every
                 single stage of production.
               </p>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <div className="mt-space-md flex flex-wrap gap-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 font-mono text-spec-mono text-primary-fixed">
+                  <Icon name="flag" className="text-[14px]" /> Est. {company.founded}
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 font-mono text-spec-mono text-primary-fixed">
+                  <Icon name="workspace_premium" className="text-[14px]" /> {company.yearsExperience} Years
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 font-mono text-spec-mono text-primary-fixed">
+                  <Icon name="public" className="text-[14px]" /> {company.countriesServed}+ Countries
+                </span>
+              </div>
             </Reveal>
           </div>
           <Reveal direction="left">
@@ -158,6 +163,50 @@ export default function AboutPage() {
               </StaggerItem>
             ))}
           </Stagger>
+        </div>
+      </section>
+
+      {/* Managing Director message */}
+      <section className="bg-surface pb-space-2xl">
+        <div className="container-pad">
+          <Reveal className="grid items-center gap-space-xl rounded-2xl border border-cleanroom-navy/[0.06] bg-sterile-surface p-space-lg shadow-level-1 md:grid-cols-[280px_1fr] md:p-space-xl">
+            {/* Portrait placeholder */}
+            <div className="mx-auto w-full max-w-[240px]">
+              <div className="relative aspect-square overflow-hidden rounded-2xl bg-gradient-to-br from-[#30424c] to-[#025e7a]">
+                <div className="absolute inset-0 grid place-items-center">
+                  <Icon name="person" className="text-white/80 text-[96px]" filled />
+                </div>
+                <span className="absolute bottom-2 left-1/2 -translate-x-1/2 rounded bg-black/30 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-white/80">
+                  Portrait placeholder
+                </span>
+              </div>
+              <div className="mt-3 text-center">
+                <p className="font-heading text-headline-sm font-bold text-cleanroom-navy">
+                  Mr. Ahmad Sanan
+                </p>
+                <p className="font-body text-label-caps uppercase tracking-wider text-primary">
+                  Managing Director
+                </p>
+              </div>
+            </div>
+            {/* Message */}
+            <div>
+              <span className="eyebrow text-primary">
+                <Icon name="record_voice_over" className="text-[18px]" />
+                Message from the Managing Director
+              </span>
+              <Icon name="format_quote" className="mt-3 block text-primary/30 text-[40px]" />
+              <p className="font-display text-headline-md font-semibold leading-snug text-cleanroom-navy">
+                A precise medication deserves an equally precise instrument. Every device we build
+                carries that responsibility — to protect the patient at the other end.
+              </p>
+              <p className="mt-4 font-body text-body-md text-on-surface-variant">
+                Since {company.founded}, our commitment has stayed the same: uncompromising quality,
+                controlled manufacturing, and long-term reliability our partners can trust — from a
+                single hospital order to a national procurement tender.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -244,19 +293,32 @@ export default function AboutPage() {
             />
           </div>
           <Stagger className="grid grid-cols-2 gap-space-sm sm:grid-cols-3 lg:grid-cols-6" stagger={0.06}>
-            {certs.map((c) => (
-              <StaggerItem
-                key={c.code}
-                className="flex flex-col items-center gap-1 rounded-xl border border-primary/15 bg-spec-code-bg/60 p-space-md text-center transition-transform duration-300 hover:-translate-y-1"
-              >
-                <Icon name="verified" className="text-primary text-[24px]" filled />
-                <span className="font-mono text-spec-mono font-bold text-cleanroom-navy">{c.code}</span>
-                <span className="font-body text-label-caps uppercase text-on-surface-variant">
-                  {c.label}
-                </span>
+            {certifications.map((c) => (
+              <StaggerItem key={c.code}>
+                <a
+                  href={c.file}
+                  download
+                  className="flex h-full flex-col items-center gap-1 rounded-xl border border-primary/15 bg-spec-code-bg/60 p-space-md text-center transition-transform duration-300 hover:-translate-y-1"
+                >
+                  <Icon name="verified" className="text-primary text-[24px]" filled />
+                  <span className="font-mono text-spec-mono font-bold text-cleanroom-navy">{c.code}</span>
+                  <span className="font-body text-label-caps uppercase text-on-surface-variant">
+                    {c.name}
+                  </span>
+                  <span className="mt-1 inline-flex items-center gap-1 font-body text-label-caps uppercase tracking-wider text-primary">
+                    <Icon name="download" className="text-[14px]" />
+                    PDF
+                  </span>
+                </a>
               </StaggerItem>
             ))}
           </Stagger>
+          <Reveal delay={0.1} className="mt-space-lg text-center">
+            <Link href="/quality" className="btn-ghost">
+              View Full Quality & Compliance
+              <Icon name="arrow_forward" className="text-[18px]" />
+            </Link>
+          </Reveal>
         </div>
       </section>
 
