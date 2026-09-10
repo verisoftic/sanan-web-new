@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Icon } from "@/components/Icon";
 import { RfqForm } from "@/components/RfqForm";
+import { EcgBackground } from "@/components/EcgBackground";
 import { AnimatedHeading, Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { site } from "@/lib/site";
 
@@ -24,6 +25,7 @@ export default function ContactPage() {
       <section className="relative overflow-hidden bg-cleanroom-navy text-white">
         <div className="blueprint-grid absolute inset-0 opacity-60" aria-hidden="true" />
         <div className="pointer-events-none absolute -right-16 -top-16 h-80 w-80 rounded-full bg-clinical-cyan-glow/15 blur-3xl" />
+        <EcgBackground className="opacity-[0.22]" />
         <div className="container-pad relative z-10 pb-space-2xl pt-32 md:pt-40">
           <Reveal>
             <span className="eyebrow text-clinical-cyan-glow">

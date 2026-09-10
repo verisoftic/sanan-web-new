@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { StatCounter } from "@/components/StatCounter";
+import { EcgBackground } from "@/components/EcgBackground";
 import { AnimatedHeading, Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { certifications, company, pillars } from "@/lib/site";
 
@@ -50,6 +51,7 @@ export default function AboutPage() {
       <section className="relative overflow-hidden bg-cleanroom-navy text-white">
         <div className="blueprint-grid absolute inset-0 opacity-60" aria-hidden="true" />
         <div className="pointer-events-none absolute -right-20 -top-20 h-96 w-96 rounded-full bg-clinical-cyan-glow/15 blur-3xl" />
+        <EcgBackground className="opacity-[0.22]" />
         <div className="container-pad relative z-10 grid items-center gap-space-xl pb-space-2xl pt-32 md:pt-40 lg:grid-cols-2">
           <div>
             <Reveal>

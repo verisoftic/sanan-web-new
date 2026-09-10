@@ -22,6 +22,8 @@ export const company = {
   yearsExperience: "10+",
   annualCapacity: 50, // million units/yr (headline)
   countriesServed: 24,
+  citiesServed: 40, // cities across Pakistan
+  hospitals: 500, // hospitals & clinics served
   coreLines: 6,
   facilitySqft: "120,000",
   cleanroomClass: "10,000",
@@ -112,11 +114,43 @@ export const certifications: Certification[] = [
   { code: "DRAP", name: "Registered Manufacturer", issuer: "Govt. of Pakistan", file: "/docs/drap-registration.pdf" },
 ];
 
-// DUMMY export regions for the global-reach section.
+// DUMMY provinces/regions for the nationwide-reach section (city counts).
 export const regions = [
-  { name: "South Asia", countries: 4, icon: "public" },
-  { name: "Middle East", countries: 7, icon: "public" },
-  { name: "Africa", countries: 6, icon: "public" },
-  { name: "Southeast Asia", countries: 4, icon: "public" },
-  { name: "Central Asia", countries: 3, icon: "public" },
+  { name: "Punjab", cities: 12 },
+  { name: "Sindh", cities: 8 },
+  { name: "Khyber Pakhtunkhwa", cities: 7 },
+  { name: "Balochistan", cities: 5 },
+  { name: "Islamabad (ICT)", cities: 2 },
+  { name: "Gilgit-Baltistan", cities: 3 },
+  { name: "Azad Kashmir", cities: 3 },
 ];
+
+// DUMMY major-city nodes on the Pakistan map (coordinates in the map's viewBox 0 0 612 560).
+export interface CityNode {
+  name: string;
+  x: number;
+  y: number;
+  hub?: boolean;
+  // label placement
+  anchor?: "start" | "middle" | "end";
+  dx?: number;
+  dy?: number;
+}
+
+export const pakistanCities: CityNode[] = [
+  { name: "Islamabad", x: 464, y: 143, hub: true, anchor: "start", dx: 9, dy: 15 },
+  { name: "Lahore", x: 508, y: 228, anchor: "start", dx: 9, dy: 4 },
+  { name: "Karachi", x: 254, y: 496, anchor: "end", dx: -9, dy: 4 },
+  { name: "Peshawar", x: 413, y: 129, anchor: "end", dx: -9, dy: 2 },
+  { name: "Quetta", x: 254, y: 283, anchor: "end", dx: -9, dy: 4 },
+  { name: "Multan", x: 411, y: 284, anchor: "end", dx: -9, dy: 4 },
+  { name: "Faisalabad", x: 465, y: 233, anchor: "start", dx: 9, dy: 14 },
+  { name: "Hyderabad", x: 301, y: 474, anchor: "end", dx: -9, dy: 4 },
+  { name: "Sukkur", x: 318, y: 382, anchor: "end", dx: -9, dy: 4 },
+  { name: "Gilgit", x: 508, y: 53, anchor: "start", dx: 9, dy: 4 },
+  { name: "Muzaffarabad", x: 496, y: 118, anchor: "start", dx: 9, dy: 4 },
+];
+
+// Simplified Pakistan outline (incl. Gilgit-Baltistan & full Kashmir), viewBox 0 0 612 560.
+export const pakistanPath =
+  "M563,10 L602,70 L515,130 L518,190 L542,250 L515,290 L494,330 L435,370 L379,390 L393,450 L382,518 L316,542 L254,530 L219,482 L149,482 L90,486 L66,482 L80,430 L94,370 L107,314 L149,310 L229,266 L278,230 L334,218 L355,170 L396,126 L410,86 L414,50 L462,14 L515,10 Z";

@@ -4,18 +4,12 @@ import { motion } from "framer-motion";
 import { Icon } from "./Icon";
 import { StatCounter } from "./StatCounter";
 import { AnimatedHeading, Reveal, Stagger, StaggerItem } from "./motion";
-import { company, regions } from "@/lib/site";
+import { company, pakistanCities, pakistanPath, regions } from "@/lib/site";
 
-// Node positions (relative %) on the stylized globe.
-const nodes = [
-  { x: 30, y: 40 },
-  { x: 46, y: 30 },
-  { x: 58, y: 45 },
-  { x: 68, y: 34 },
-  { x: 40, y: 58 },
-  { x: 62, y: 62 },
-  { x: 74, y: 52 },
-];
+const hub = pakistanCities.find((c) => c.hub) ?? pakistanCities[0];
+// Vertical + horizontal graticule lines clipped to the country shape.
+const vLines = Array.from({ length: 9 }, (_, i) => 40 + i * 64); // x positions
+const hLines = Array.from({ length: 8 }, (_, i) => 30 + i * 66); // y positions
 
 export function GlobalReach() {
   return (
@@ -27,25 +21,25 @@ export function GlobalReach() {
         <div className="flex flex-col gap-space-md">
           <Reveal>
             <span className="eyebrow text-clinical-cyan-glow">
-              <Icon name="public" className="text-[18px]" />
-              Global Footprint
+              <Icon name="location_on" className="text-[18px]" filled />
+              Nationwide Footprint
             </span>
           </Reveal>
           <AnimatedHeading
-            text={`Trusted Across ${company.countriesServed}+ Countries`}
+            text="Trusted Across Pakistan"
             as="h2"
             className="font-display text-headline-lg-mobile font-bold md:text-headline-lg"
-            highlight={`${company.countriesServed}+`}
+            highlight="Pakistan"
             highlightClassName="text-clinical-cyan-glow"
           />
           <Reveal delay={0.15}>
             <p className="max-w-xl font-body text-body-lg text-surface-variant/90">
-              From regional blood banks to national procurement tenders, Sanan devices reach
-              healthcare providers across four continents.
+              From tertiary-care hospitals in the major cities to district clinics and blood banks,
+              Sanan devices are trusted by healthcare providers across every province of Pakistan.
             </p>
           </Reveal>
 
-          <Stagger className="mt-2 flex flex-wrap gap-2" stagger={0.08}>
+          <Stagger className="mt-2 flex flex-wrap gap-2" stagger={0.06}>
             {regions.map((r) => (
               <StaggerItem
                 key={r.name}
@@ -53,19 +47,27 @@ export function GlobalReach() {
               >
                 <span className="h-1.5 w-1.5 rounded-full bg-clinical-cyan-glow" />
                 <span className="font-body text-body-sm text-surface-variant/90">{r.name}</span>
-                <span className="font-mono text-spec-mono text-clinical-cyan-glow">{r.countries}</span>
+                <span className="font-mono text-spec-mono text-clinical-cyan-glow">{r.cities}</span>
               </StaggerItem>
             ))}
           </Stagger>
 
           <Reveal delay={0.2}>
-            <div className="mt-2 flex gap-space-lg">
+            <div className="mt-2 flex flex-wrap gap-space-lg">
               <div>
                 <span className="block font-display text-display-hero-mobile font-extrabold leading-none text-clinical-cyan-glow">
-                  <StatCounter value={company.countriesServed} suffix="+" />
+                  <StatCounter value={company.citiesServed} suffix="+" />
                 </span>
                 <span className="mt-1 block font-body text-label-caps uppercase text-surface-variant/80">
-                  Countries Served
+                  Cities Served
+                </span>
+              </div>
+              <div>
+                <span className="block font-display text-display-hero-mobile font-extrabold leading-none text-clinical-cyan-glow">
+                  <StatCounter value={company.hospitals} suffix="+" />
+                </span>
+                <span className="mt-1 block font-body text-label-caps uppercase text-surface-variant/80">
+                  Hospitals &amp; Clinics
                 </span>
               </div>
               <div>
@@ -80,56 +82,108 @@ export function GlobalReach() {
           </Reveal>
         </div>
 
-        {/* Stylized network globe */}
+        {/* Pakistan map with connected city nodes */}
         <Reveal direction="left" className="relative">
-          <div className="relative mx-auto aspect-square w-full max-w-md">
-            <svg viewBox="0 0 400 400" className="h-full w-full" fill="none" aria-hidden="true">
+          <div className="relative mx-auto w-full max-w-lg">
+            <svg viewBox="0 0 612 560" className="h-full w-full" fill="none" aria-hidden="true">
               <defs>
-                <radialGradient id="globe-grad" cx="0.4" cy="0.35" r="0.75">
+                <radialGradient id="pk-grad" cx="0.45" cy="0.3" r="0.8">
                   <stop offset="0" stopColor="#0e2a44" />
                   <stop offset="1" stopColor="#081426" />
                 </radialGradient>
+                <clipPath id="pk-clip">
+                  <path d={pakistanPath} />
+                </clipPath>
+                <filter id="pk-glow" x="-40%" y="-40%" width="180%" height="180%">
+                  <feGaussianBlur stdDeviation="3" result="b" />
+                  <feMerge>
+                    <feMergeNode in="b" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
               </defs>
-              <circle cx="200" cy="200" r="160" fill="url(#globe-grad)" stroke="rgba(64,181,173,0.25)" strokeWidth="1.5" />
-              {/* Longitude / latitude arcs */}
-              {[0.35, 0.6, 0.85].map((k, i) => (
-                <ellipse key={`lat-${i}`} cx="200" cy="200" rx="160" ry={160 * k} fill="none" stroke="rgba(64,181,173,0.15)" strokeWidth="1" />
-              ))}
-              {[0.35, 0.6, 0.85].map((k, i) => (
-                <ellipse key={`lon-${i}`} cx="200" cy="200" rx={160 * k} ry="160" fill="none" stroke="rgba(64,181,173,0.12)" strokeWidth="1" />
-              ))}
-              <line x1="40" y1="200" x2="360" y2="200" stroke="rgba(64,181,173,0.18)" strokeWidth="1" />
-              <line x1="200" y1="40" x2="200" y2="360" stroke="rgba(64,181,173,0.12)" strokeWidth="1" />
 
-              {/* Connection arcs between nodes */}
-              {nodes.map((n, i) => {
-                if (i === 0) return null;
-                const a = nodes[0];
-                return (
+              {/* Country fill */}
+              <path d={pakistanPath} fill="url(#pk-grad)" />
+
+              {/* Graticule clipped to country */}
+              <g clipPath="url(#pk-clip)" stroke="rgba(64,181,173,0.16)" strokeWidth="1">
+                {vLines.map((x) => (
+                  <line key={`v-${x}`} x1={x} y1="0" x2={x} y2="560" />
+                ))}
+                {hLines.map((y) => (
+                  <line key={`h-${y}`} x1="0" y1={y} x2="612" y2={y} />
+                ))}
+              </g>
+
+              {/* Country border */}
+              <path
+                d={pakistanPath}
+                fill="none"
+                stroke="rgba(64,181,173,0.5)"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+              />
+
+              {/* Spokes from the capital hub to each city */}
+              {pakistanCities.map((c, i) =>
+                c.hub ? null : (
                   <motion.line
-                    key={`arc-${i}`}
-                    x1={(a.x / 100) * 400}
-                    y1={(a.y / 100) * 400}
-                    x2={(n.x / 100) * 400}
-                    y2={(n.y / 100) * 400}
+                    key={`arc-${c.name}`}
+                    x1={hub.x}
+                    y1={hub.y}
+                    x2={c.x}
+                    y2={c.y}
                     stroke="rgba(125,239,255,0.35)"
                     strokeWidth="1"
                     initial={{ pathLength: 0, opacity: 0 }}
                     whileInView={{ pathLength: 1, opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.3 + i * 0.12, ease: "easeOut" }}
+                    transition={{ duration: 0.9, delay: 0.3 + i * 0.08, ease: "easeOut" }}
                   />
-                );
-              })}
+                )
+              )}
 
-              {/* Pulsing nodes */}
-              {nodes.map((n, i) => (
-                <g key={`node-${i}`}>
-                  <circle cx={(n.x / 100) * 400} cy={(n.y / 100) * 400} r="4" fill="#7defff" />
-                  <circle cx={(n.x / 100) * 400} cy={(n.y / 100) * 400} r="4" fill="none" stroke="#7defff" strokeWidth="1.5" className="ecg-base" style={{ transformOrigin: "center" }}>
-                    <animate attributeName="r" values="4;14;4" dur="2.8s" begin={`${i * 0.35}s`} repeatCount="indefinite" />
-                    <animate attributeName="opacity" values="0.8;0;0.8" dur="2.8s" begin={`${i * 0.35}s`} repeatCount="indefinite" />
+              {/* City nodes */}
+              {pakistanCities.map((c, i) => (
+                <g key={`node-${c.name}`}>
+                  {/* pulsing ring */}
+                  <circle cx={c.x} cy={c.y} r={c.hub ? 6 : 4} fill="none" stroke="#7defff" strokeWidth="1.5">
+                    <animate
+                      attributeName="r"
+                      values={c.hub ? "6;18;6" : "4;13;4"}
+                      dur="2.8s"
+                      begin={`${i * 0.28}s`}
+                      repeatCount="indefinite"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      values="0.85;0;0.85"
+                      dur="2.8s"
+                      begin={`${i * 0.28}s`}
+                      repeatCount="indefinite"
+                    />
                   </circle>
+                  {/* core dot */}
+                  <circle
+                    cx={c.x}
+                    cy={c.y}
+                    r={c.hub ? 5 : 3.5}
+                    fill={c.hub ? "#7defff" : "#40B5AD"}
+                    filter={c.hub ? "url(#pk-glow)" : undefined}
+                  />
+                  {/* label */}
+                  <text
+                    x={c.x + (c.dx ?? 8)}
+                    y={c.y + (c.dy ?? 4)}
+                    textAnchor={c.anchor ?? "start"}
+                    className="font-mono"
+                    fontSize={c.hub ? 13 : 11}
+                    fontWeight={c.hub ? 700 : 500}
+                    fill={c.hub ? "#eafcff" : "rgba(230,244,246,0.82)"}
+                  >
+                    {c.name}
+                  </text>
                 </g>
               ))}
             </svg>
