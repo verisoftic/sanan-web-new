@@ -20,6 +20,8 @@ export interface Product {
   applications: string[];
   packaging: string[];
   datasheet: string;
+  // Exploded component diagram (placeholder per product — replace image later)
+  explodedImage: string;
 }
 
 export const products: Product[] = [
@@ -48,6 +50,7 @@ export const products: Product[] = [
     applications: ["General clinical dosing", "Surgical & anesthesia", "Vaccination programs", "Insulin & fixed-dose"],
     packaging: ["Individual Tyvek blister", "Inner box of 100", "Master carton of 1,600"],
     datasheet: "/docs/datasheet-nova-syringes.pdf",
+    explodedImage: "/images/products/exploded-nova-syringes.svg",
   },
   {
     slug: "nova-iv-kits",
@@ -74,6 +77,7 @@ export const products: Product[] = [
     applications: ["Gravity infusion", "Fluid & electrolyte therapy", "Medication delivery", "Ward & OT use"],
     packaging: ["Individual sterile pouch", "Inner box of 25", "Master carton of 400"],
     datasheet: "/docs/datasheet-nova-iv-kits.pdf",
+    explodedImage: "/images/products/exploded-nova-iv-kits.svg",
   },
   {
     slug: "nova-drips",
@@ -100,6 +104,7 @@ export const products: Product[] = [
     applications: ["Pediatric & neonatal", "Controlled medication drips", "Long-duration infusion", "Critical care"],
     packaging: ["Individual sterile pouch", "Inner box of 25", "Master carton of 400"],
     datasheet: "/docs/datasheet-nova-drips.pdf",
+    explodedImage: "/images/products/exploded-nova-drips.svg",
   },
   {
     slug: "nova-cannula",
@@ -126,6 +131,7 @@ export const products: Product[] = [
     applications: ["Peripheral IV access", "Emergency & trauma", "Blood sampling", "Continuous infusion"],
     packaging: ["Individual sterile blister", "Inner box of 50", "Master carton of 1,000"],
     datasheet: "/docs/datasheet-nova-cannula.pdf",
+    explodedImage: "/images/products/exploded-nova-cannula.svg",
   },
   {
     slug: "nova-blood-bags",
@@ -152,6 +158,7 @@ export const products: Product[] = [
     applications: ["Whole-blood collection", "Blood banks", "Mobile donation drives", "Hospital transfusion"],
     packaging: ["Individual overwrap", "Inner box of 6", "Master carton of 96"],
     datasheet: "/docs/datasheet-nova-blood-bags.pdf",
+    explodedImage: "/images/products/exploded-nova-blood-bags.svg",
   },
   {
     slug: "nova-blood-bag-kits",
@@ -178,6 +185,7 @@ export const products: Product[] = [
     applications: ["Component separation", "Apheresis support", "Regional blood centers", "Tertiary hospitals"],
     packaging: ["Individual overwrap", "Inner box of 4", "Master carton of 48"],
     datasheet: "/docs/datasheet-nova-blood-bag-kits.pdf",
+    explodedImage: "/images/products/exploded-nova-blood-bag-kits.svg",
   },
 ];
 

@@ -187,8 +187,29 @@ export default async function ProductDetailPage({
             </Stagger>
           </Reveal>
 
-          {/* Variants + packaging + applications */}
+          {/* Exploded diagram + variants + packaging + applications */}
           <div className="flex flex-col gap-space-lg">
+            {/* Exploded component view (placeholder per product) */}
+            <Reveal>
+              <div className="overflow-hidden rounded-xl border border-cleanroom-navy/[0.06] bg-white shadow-level-1">
+                <div className="relative aspect-[1000/440] w-full">
+                  <Image
+                    src={product.explodedImage}
+                    alt={`${product.name} — exploded component view`}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 42vw"
+                    className="object-contain p-3"
+                  />
+                </div>
+                <div className="flex items-center gap-1.5 border-t border-spec-border px-space-md py-2.5">
+                  <Icon name="view_in_ar" className="text-primary text-[16px]" />
+                  <span className="font-body text-label-caps uppercase tracking-wider text-on-surface-variant">
+                    Exploded Component View
+                  </span>
+                </div>
+              </div>
+            </Reveal>
+
             <Reveal>
               <h3 className="mb-3 font-heading text-headline-sm font-bold text-cleanroom-navy">
                 Available Variants

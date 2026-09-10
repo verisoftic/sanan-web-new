@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 440" width="1000" height="440" font-family="Inter, system-ui, sans-serif">
+  <rect width="1000" height="440" fill="#ffffff"/>
+  <!-- soft ground shadow -->
+  <ellipse cx="500" cy="330" rx="430" ry="26" fill="#0a192f" opacity="0.05"/>
+
+  <!-- Needle Cap -->
+  <rect x="55" y="204" width="105" height="52" rx="16" fill="#eef3f6" stroke="#b4c1c9" stroke-width="2"/>
+  <line x1="72" y1="230" x2="120" y2="230" stroke="#cdd7dd" stroke-width="1.5"/>
+  <path d="M160 214 q10 16 0 32" fill="none" stroke="#b4c1c9" stroke-width="2"/>
+
+  <!-- Needle -->
+  <line x1="178" y1="230" x2="330" y2="230" stroke="#8895a0" stroke-width="3" stroke-linecap="round"/>
+  <path d="M330 230 l-16 -5 v10 z" fill="#8895a0"/>
+
+  <!-- Needle Hub -->
+  <path d="M348 214 L410 208 Q432 210 432 230 Q432 250 410 252 L348 246 Q340 230 348 214 Z" fill="#e9eef1" stroke="#b4c1c9" stroke-width="2"/>
+  <line x1="404" y1="212" x2="404" y2="248" stroke="#cdd7dd" stroke-width="1.5"/>
+  <line x1="388" y1="214" x2="388" y2="246" stroke="#cdd7dd" stroke-width="1.5"/>
+
+  <!-- Rubber Seal -->
+  <rect x="470" y="198" width="60" height="64" rx="16" fill="#26333c"/>
+  <line x1="472" y1="216" x2="528" y2="216" stroke="#3c4b55" stroke-width="3"/>
+  <line x1="472" y1="244" x2="528" y2="244" stroke="#3c4b55" stroke-width="3"/>
+  <ellipse cx="500" cy="230" rx="9" ry="12" fill="#151d22"/>
+
+  <!-- Barrel -->
+  <rect x="565" y="178" width="250" height="104" rx="20" fill="#f2f6f8" stroke="#b4c1c9" stroke-width="2"/>
+  <rect x="812" y="166" width="22" height="128" rx="9" fill="#e9eef1" stroke="#b4c1c9" stroke-width="2"/>
+  <text x="655" y="222" font-size="30" font-weight="700" fill="#0f172a" letter-spacing="1">NOVA</text>
+  <!-- graduations -->
+  <g stroke="#334155" stroke-width="1.2">
+    <line x1="600" y1="252" x2="600" y2="264"/>
+    <line x1="620" y1="254" x2="620" y2="262"/>
+    <line x1="640" y1="252" x2="640" y2="264"/>
+    <line x1="660" y1="254" x2="660" y2="262"/>
+    <line x1="680" y1="252" x2="680" y2="264"/>
+    <line x1="700" y1="254" x2="700" y2="262"/>
+    <line x1="720" y1="252" x2="720" y2="264"/>
+    <line x1="740" y1="254" x2="740" y2="262"/>
+    <line x1="760" y1="252" x2="760" y2="264"/>
+    <line x1="780" y1="254" x2="780" y2="262"/>
+  </g>
+  <text x="788" y="242" font-size="16" font-style="italic" fill="#0f172a">5 ml</text>
+
+  <!-- Plunger -->
+  <rect x="832" y="222" width="112" height="16" rx="4" fill="#eef3f6" stroke="#b4c1c9" stroke-width="2"/>
+  <line x1="862" y1="210" x2="862" y2="250" stroke="#dbe3e8" stroke-width="8"/>
+  <rect x="944" y="196" width="16" height="68" rx="8" fill="#e9eef1" stroke="#b4c1c9" stroke-width="2"/>
+
+  <!-- Labels -->
+  <g stroke="#2fa5b3" stroke-width="1.5">
+    <line x1="107" y1="256" x2="107" y2="320"/>
+    <line x1="250" y1="232" x2="250" y2="360"/>
+    <line x1="395" y1="210" x2="380" y2="126"/>
+    <line x1="500" y1="200" x2="490" y2="112"/>
+    <line x1="690" y1="282" x2="690" y2="346"/>
+    <line x1="900" y1="222" x2="900" y2="166"/>
+  </g>
+  <g fill="#2fa5b3">
+    <circle cx="107" cy="256" r="3"/>
+    <circle cx="250" cy="232" r="3"/>
+    <circle cx="395" cy="210" r="3"/>
+    <circle cx="500" cy="200" r="3"/>
+    <circle cx="690" cy="282" r="3"/>
+    <circle cx="900" cy="222" r="3"/>
+  </g>
+  <g font-size="15" font-weight="600" fill="#ffffff" text-anchor="middle">
+    <rect x="51" y="320" width="112" height="30" rx="6" fill="#006671"/>
+    <text x="107" y="340">Needle Cap</text>
+    <rect x="209" y="360" width="82" height="30" rx="6" fill="#006671"/>
+    <text x="250" y="380">Needle</text>
+    <rect x="324" y="96" width="112" height="30" rx="6" fill="#006671"/>
+    <text x="380" y="116">Needle Hub</text>
+    <rect x="431" y="82" width="118" height="30" rx="6" fill="#006671"/>
+    <text x="490" y="102">Rubber Seal</text>
+    <rect x="651" y="346" width="78" height="30" rx="6" fill="#006671"/>
+    <text x="690" y="366">Barrel</text>
+    <rect x="854" y="136" width="92" height="30" rx="6" fill="#006671"/>
+    <text x="900" y="156">Plunger</text>
+  </g>
+</svg>
