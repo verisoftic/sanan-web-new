@@ -57,6 +57,27 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+// Every Icon in the app renders at a fixed opsz(24)/wght(400)/GRAD(0) and only
+// toggles FILL between 0 and 1 — so the font is requested pinned to exactly that
+// instance, plus `icon_names` to subset it to only the glyphs actually used.
+// This keeps the font at ~11KB instead of the ~4MB the unpinned/unsubsetted
+// variable-font request would otherwise pull down (verified via direct fetch).
+const ICON_NAMES = [
+  "air", "arrow_forward", "arrow_right", "assignment", "biotech", "bolt", "build",
+  "call", "category", "chat", "check_circle", "checklist", "checkroom",
+  "chevron_left", "chevron_right", "close", "cyclone", "description", "domain",
+  "download", "event", "event_available", "expand_more", "fact_check", "factory",
+  "flag", "format_quote", "handshake", "health_and_safety", "help", "inventory",
+  "inventory_2", "label", "language", "local_shipping", "location_on", "lock",
+  "mail", "menu", "person", "photo_library", "pin_drop", "policy",
+  "precision_manufacturing", "public", "receipt_long", "record_voice_over",
+  "request_quote", "route", "sanitizer", "schedule", "science", "search",
+  "search_off", "send", "straighten", "support_agent", "target", "timeline",
+  "verified", "verified_user", "view_in_ar", "workspace_premium", "zoom_in",
+].join(",");
+
+const iconFontHref = `https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&icon_names=${ICON_NAMES}&display=swap`;
+
 export default function RootLayout({
   children,
 }: {
@@ -65,10 +86,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jakarta.variable} ${inter.variable} ${mono.variable}`}>
       <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
-        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href={iconFontHref} />
       </head>
       <body className="flex min-h-screen flex-col">
         <Header />

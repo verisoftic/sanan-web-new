@@ -59,16 +59,8 @@ export function Hero() {
       <div className="blueprint-grid absolute inset-0 opacity-40" aria-hidden="true" />
       {/* Dim animated ECG heartbeat */}
       <EcgBackground className="opacity-[0.22]" />
-      <motion.div
-        className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-clinical-cyan-glow/20 blur-3xl"
-        animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.8, 0.5] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="pointer-events-none absolute -bottom-32 -left-24 h-[26rem] w-[26rem] rounded-full bg-primary-container/25 blur-3xl"
-        animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.7, 0.4] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      />
+      <div className="glow-blob-a pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-clinical-cyan-glow/20 blur-3xl" />
+      <div className="glow-blob-b pointer-events-none absolute -bottom-32 -left-24 h-[26rem] w-[26rem] rounded-full bg-primary-container/25 blur-3xl" />
 
       <div className="container-pad relative z-10 grid items-center gap-space-xl py-space-2xl md:py-space-3xl lg:grid-cols-2">
         {/* Copy */}

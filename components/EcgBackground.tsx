@@ -1,7 +1,12 @@
 /**
  * Dim, animated medical ECG / heartbeat line for dark hero backgrounds.
- * A faint static trace with a brighter pulse that sweeps across it.
- * Pure CSS animation (respects prefers-reduced-motion via globals.css).
+ * A static faint trace with a bright pulse sweeping across it.
+ *
+ * Perf note: the pulse is a plain <div> masked to the trace shape and moved
+ * with `transform: translateX()` (GPU-composited, no repaint). The previous
+ * version animated the SVG `stroke-dashoffset` of a blurred (`feGaussianBlur`)
+ * path — both are main-thread, paint-triggering operations that must
+ * re-rasterize every frame, and it ran on every page's hero continuously.
  */
 const SEGMENTS = 6;
 const SEG_WIDTH = 240;
@@ -16,18 +21,23 @@ function buildPath() {
   return d;
 }
 
-export function EcgBackground({ className = "" }: { className?: string }) {
-  const d = buildPath();
-  const width = SEGMENTS * SEG_WIDTH;
+const PATH = buildPath();
+const WIDTH = SEGMENTS * SEG_WIDTH;
+// URL-encoded so it can be embedded directly in a CSS mask-image data URI.
+const MASK_SVG = `data:image/svg+xml,${encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${WIDTH} 180" preserveAspectRatio="none"><path d="${PATH}" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+)}`;
 
+export function EcgBackground({ className = "" }: { className?: string }) {
   return (
     <div
       className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
       aria-hidden="true"
     >
+      {/* Static faint trace (drawn once, never repainted) */}
       <svg
         className="absolute left-0 top-1/2 h-[55%] w-full -translate-y-1/2"
-        viewBox={`0 0 ${width} 180`}
+        viewBox={`0 0 ${WIDTH} 180`}
         preserveAspectRatio="none"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -39,40 +49,33 @@ export function EcgBackground({ className = "" }: { className?: string }) {
             <stop offset="0.85" stopColor="#40B5AD" stopOpacity="1" />
             <stop offset="1" stopColor="#40B5AD" stopOpacity="0" />
           </linearGradient>
-          <filter id="ecg-glow" x="-20%" y="-60%" width="140%" height="220%">
-            <feGaussianBlur stdDeviation="3.5" result="b" />
-            <feMerge>
-              <feMergeNode in="b" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
         </defs>
-
-        {/* Faint continuous trace */}
         <path
-          className="ecg-base"
-          d={d}
+          d={PATH}
           stroke="url(#ecg-fade)"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          opacity="0.35"
           vectorEffect="non-scaling-stroke"
-        />
-
-        {/* Bright pulse sweeping across the trace */}
-        <path
-          className="ecg-beam"
-          d={d}
-          pathLength={1}
-          stroke="#7defff"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          filter="url(#ecg-glow)"
-          vectorEffect="non-scaling-stroke"
-          opacity="0.8"
         />
       </svg>
+
+      {/* Bright pulse: a blurred gradient streak, masked to the trace shape,
+          swept with a compositor-only transform animation. */}
+      <div
+        className="ecg-beam absolute top-1/2 h-[55%] w-full -translate-y-1/2"
+        style={{
+          maskImage: `url("${MASK_SVG}")`,
+          WebkitMaskImage: `url("${MASK_SVG}")`,
+          maskSize: "100% 100%",
+          WebkitMaskSize: "100% 100%",
+          maskRepeat: "no-repeat",
+          WebkitMaskRepeat: "no-repeat",
+        }}
+      >
+        <div className="ecg-beam-glow h-full w-1/4" />
+      </div>
     </div>
   );
 }

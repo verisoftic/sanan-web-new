@@ -145,47 +145,49 @@ export function GlobalReach() {
               )}
 
               {/* City nodes */}
-              {pakistanCities.map((c, i) => (
-                <g key={`node-${c.name}`}>
-                  {/* pulsing ring */}
-                  <circle cx={c.x} cy={c.y} r={c.hub ? 6 : 4} fill="none" stroke="#7defff" strokeWidth="1.5">
-                    <animate
-                      attributeName="r"
-                      values={c.hub ? "6;18;6" : "4;13;4"}
-                      dur="2.8s"
-                      begin={`${i * 0.28}s`}
-                      repeatCount="indefinite"
+              {pakistanCities.map((c, i) => {
+                const baseR = c.hub ? 6 : 4;
+                return (
+                  <g key={`node-${c.name}`} transform={`translate(${c.x} ${c.y})`}>
+                    {/* pulsing ring — transform/opacity only, GPU-composited */}
+                    <motion.circle
+                      cx={0}
+                      cy={0}
+                      r={baseR}
+                      fill="none"
+                      stroke="#7defff"
+                      strokeWidth="1.5"
+                      animate={{ scale: [1, c.hub ? 3 : 3.25, 1], opacity: [0.85, 0, 0.85] }}
+                      transition={{
+                        duration: 2.8,
+                        repeat: Infinity,
+                        delay: i * 0.28,
+                        ease: "easeOut",
+                      }}
                     />
-                    <animate
-                      attributeName="opacity"
-                      values="0.85;0;0.85"
-                      dur="2.8s"
-                      begin={`${i * 0.28}s`}
-                      repeatCount="indefinite"
+                    {/* core dot */}
+                    <circle
+                      cx={0}
+                      cy={0}
+                      r={c.hub ? 5 : 3.5}
+                      fill={c.hub ? "#7defff" : "#40B5AD"}
+                      filter={c.hub ? "url(#pk-glow)" : undefined}
                     />
-                  </circle>
-                  {/* core dot */}
-                  <circle
-                    cx={c.x}
-                    cy={c.y}
-                    r={c.hub ? 5 : 3.5}
-                    fill={c.hub ? "#7defff" : "#40B5AD"}
-                    filter={c.hub ? "url(#pk-glow)" : undefined}
-                  />
-                  {/* label */}
-                  <text
-                    x={c.x + (c.dx ?? 8)}
-                    y={c.y + (c.dy ?? 4)}
-                    textAnchor={c.anchor ?? "start"}
-                    className="font-mono"
-                    fontSize={c.hub ? 13 : 11}
-                    fontWeight={c.hub ? 700 : 500}
-                    fill={c.hub ? "#eafcff" : "rgba(230,244,246,0.82)"}
-                  >
-                    {c.name}
-                  </text>
-                </g>
-              ))}
+                    {/* label */}
+                    <text
+                      x={c.dx ?? 8}
+                      y={c.dy ?? 4}
+                      textAnchor={c.anchor ?? "start"}
+                      className="font-mono"
+                      fontSize={c.hub ? 13 : 11}
+                      fontWeight={c.hub ? 700 : 500}
+                      fill={c.hub ? "#eafcff" : "rgba(230,244,246,0.82)"}
+                    >
+                      {c.name}
+                    </text>
+                  </g>
+                );
+              })}
             </svg>
           </div>
         </Reveal>

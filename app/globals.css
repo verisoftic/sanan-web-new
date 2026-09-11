@@ -108,30 +108,61 @@
   }
 }
 
-/* Animated ECG / heartbeat sweep (used dimmed in the hero background) */
+/* Animated ECG / heartbeat sweep (used dimmed in the hero background).
+   GPU-compositor-only: transform + opacity, no layout/paint per frame. */
 @keyframes ecg-sweep {
   0% {
-    stroke-dashoffset: 1;
+    transform: translateX(-40%);
   }
   100% {
-    stroke-dashoffset: 0;
+    transform: translateX(340%);
   }
 }
 .ecg-beam {
-  stroke-dasharray: 0.06 0.94;
+  will-change: transform;
+}
+.ecg-beam-glow {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(125, 239, 255, 0.9) 45%,
+    rgba(125, 239, 255, 0.9) 55%,
+    transparent
+  );
+  filter: blur(6px);
   animation: ecg-sweep 7s linear infinite;
 }
-@keyframes ecg-blip {
+
+/* Ambient hero glow blobs — pure CSS (transform + opacity only), no JS RAF loop */
+@keyframes glow-pulse-a {
   0%,
   100% {
-    opacity: 0.25;
-  }
-  50% {
+    transform: scale(1);
     opacity: 0.5;
   }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.8;
+  }
 }
-.ecg-base {
-  animation: ecg-blip 7s ease-in-out infinite;
+@keyframes glow-pulse-b {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+}
+.glow-blob-a {
+  animation: glow-pulse-a 8s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+.glow-blob-b {
+  animation: glow-pulse-b 10s ease-in-out infinite 1s;
+  will-change: transform, opacity;
 }
 
 /* Grid blueprint background for dark command sections */
