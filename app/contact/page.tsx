@@ -135,7 +135,7 @@ export default function ContactPage() {
                     <span className="font-body text-label-caps uppercase text-on-surface-variant">
                       Official Corporate Inquiries
                     </span>
-                    <span className="block font-mono text-body-md font-semibold text-cleanroom-navy">
+                    <span className="block font-mono text-body-md font-bold text-cleanroom-navy">
                       {site.email}
                     </span>
                   </div>
@@ -216,7 +216,7 @@ export default function ContactPage() {
                     <span className="font-body text-label-caps uppercase text-on-surface-variant">
                       {a.label}
                     </span>
-                    <span className="font-mono text-spec-mono font-semibold text-cleanroom-navy">
+                    <span className="font-mono text-spec-mono font-bold text-cleanroom-navy">
                       {a.value}
                     </span>
                   </div>

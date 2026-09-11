@@ -81,8 +81,13 @@ export function ProductExplorer({
       <LayoutGroup>
         <motion.div layout className="grid grid-cols-1 gap-space-lg sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
-            {filtered.map((p) => (
-              <ProductCard key={p.slug} product={p} useCatalogImage={useCatalogImage} />
+            {filtered.map((p, i) => (
+              <ProductCard
+                key={p.slug}
+                product={p}
+                useCatalogImage={useCatalogImage}
+                priority={i < 3}
+              />
             ))}
           </AnimatePresence>
         </motion.div>

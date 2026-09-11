@@ -9,9 +9,13 @@ import type { Product } from "@/lib/products";
 export function ProductCard({
   product,
   useCatalogImage = false,
+  priority = false,
 }: {
   product: Product;
   useCatalogImage?: boolean;
+  /** Set for cards visible in the initial viewport (first row) so this image
+   * isn't lazy-loaded — avoids it becoming a slow-loading LCP candidate. */
+  priority?: boolean;
 }) {
   const href = `/products/${product.slug}`;
   return (
@@ -33,6 +37,7 @@ export function ProductCard({
           src={useCatalogImage ? product.catalogImage : product.image}
           alt={`${product.name} — ${product.tagline}`}
           fill
+          priority={priority}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-contain p-4 transition-transform duration-700 ease-out group-hover:scale-[1.07]"
         />
@@ -54,7 +59,7 @@ export function ProductCard({
                 {product.name}
               </h3>
             </Link>
-            <span className="shrink-0 font-mono text-spec-mono font-semibold text-primary">
+            <span className="shrink-0 font-mono text-spec-mono font-bold text-primary">
               {product.range}
             </span>
           </div>

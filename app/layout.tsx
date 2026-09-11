@@ -11,16 +11,23 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+// 700 was loaded but never used anywhere in the app (audited: no `font-bold`
+// or `<strong>` combined with `font-body`) — dropping it removes a whole
+// font file with zero visual change.
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   variable: "--font-inter",
   display: "swap",
 });
 
+// Was ["500", "600"], but `font-bold` (700) is the weight actually used with
+// `font-mono` throughout the site (stat values, spec codes) — without 700
+// loaded, the browser was faking it with synthetic/algorithmic bold instead
+// of real bold glyphs. Swapping 600→700 fixes that at the same file count.
 const mono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["500", "600"],
+  weight: ["500", "700"],
   variable: "--font-mono",
   display: "swap",
 });

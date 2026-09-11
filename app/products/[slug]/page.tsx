@@ -130,151 +130,158 @@ export default async function ProductDetailPage({
 
       {/* Specs + variants */}
       <section className="bg-surface">
-        <div className="container-pad grid gap-space-xl py-space-2xl lg:grid-cols-[1.2fr_1fr]">
-          {/* Specs table */}
-          <Reveal>
-            <h2 className="mb-space-md font-display text-headline-md font-bold text-cleanroom-navy">
-              Technical Specifications
-            </h2>
-            <div className="overflow-hidden rounded-xl border border-spec-border">
-              {product.specs.map((s, i) => (
-                <div
-                  key={s.label}
-                  className={`flex items-center justify-between gap-4 px-space-md py-3.5 ${
-                    i % 2 === 0 ? "bg-white" : "bg-surface-container-low"
-                  }`}
-                >
-                  <span className="font-body text-label-caps uppercase tracking-wider text-on-surface-variant">
-                    {s.label}
-                  </span>
-                  <span className="text-right font-mono text-spec-mono font-medium text-cleanroom-navy">
-                    {s.value}
-                  </span>
-                </div>
-              ))}
-              <div className="flex items-center justify-between gap-4 bg-white px-space-md py-3.5">
-                <span className="font-body text-label-caps uppercase tracking-wider text-on-surface-variant">
-                  Sterilization
-                </span>
-                <span className="font-mono text-spec-mono font-medium text-cleanroom-navy">
-                  100% Ethylene Oxide (EO)
-                </span>
-              </div>
-              <div className="flex items-center justify-between gap-4 bg-surface-container-low px-space-md py-3.5">
-                <span className="font-body text-label-caps uppercase tracking-wider text-on-surface-variant">
-                  Shelf Life
-                </span>
-                <span className="font-mono text-spec-mono font-medium text-cleanroom-navy">
-                  5 Years Guaranteed
-                </span>
-              </div>
-            </div>
-
-            {/* Key features */}
-            <h3 className="mb-3 mt-space-lg font-heading text-headline-sm font-bold text-cleanroom-navy">
-              Key Features
-            </h3>
-            <Stagger className="grid grid-cols-1 gap-2 sm:grid-cols-2" stagger={0.08}>
-              {product.features.map((f) => (
-                <StaggerItem
-                  key={f}
-                  className="flex items-center gap-2 rounded-lg bg-white p-3 shadow-level-1"
-                >
-                  <Icon name="check_circle" className="text-primary text-[18px]" filled />
-                  <span className="font-body text-body-sm text-cleanroom-navy">{f}</span>
-                </StaggerItem>
-              ))}
-            </Stagger>
-          </Reveal>
-
-          {/* Exploded diagram + variants + packaging + applications */}
-          <div className="flex flex-col gap-space-lg">
-            {/* Exploded component view (placeholder per product) */}
+        <div className="container-pad py-space-2xl">
+          <div className="grid gap-space-lg lg:grid-cols-[1.2fr_1fr]">
+            {/* Specs table + key features */}
             <Reveal>
-              <div className="overflow-hidden rounded-xl border border-cleanroom-navy/[0.06] bg-white shadow-level-1">
-                <div className="relative aspect-[1000/440] w-full">
-                  <Image
-                    src={product.explodedImage}
-                    alt={`${product.name} — exploded component view`}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 42vw"
-                    className="object-contain p-3"
-                  />
-                </div>
-                <div className="flex items-center gap-1.5 border-t border-spec-border px-space-md py-2.5">
-                  <Icon name="view_in_ar" className="text-primary text-[16px]" />
+              <h2 className="mb-space-sm font-display text-headline-md font-bold text-cleanroom-navy">
+                Technical Specifications
+              </h2>
+              <div className="overflow-hidden rounded-xl border border-spec-border">
+                {product.specs.map((s, i) => (
+                  <div
+                    key={s.label}
+                    className={`flex items-center justify-between gap-4 px-space-md py-3 ${
+                      i % 2 === 0 ? "bg-white" : "bg-surface-container-low"
+                    }`}
+                  >
+                    <span className="font-body text-label-caps uppercase tracking-wider text-on-surface-variant">
+                      {s.label}
+                    </span>
+                    <span className="text-right font-mono text-spec-mono font-medium text-cleanroom-navy">
+                      {s.value}
+                    </span>
+                  </div>
+                ))}
+                <div className="flex items-center justify-between gap-4 bg-white px-space-md py-3">
                   <span className="font-body text-label-caps uppercase tracking-wider text-on-surface-variant">
-                    Exploded Component View
+                    Sterilization
+                  </span>
+                  <span className="font-mono text-spec-mono font-medium text-cleanroom-navy">
+                    100% Ethylene Oxide (EO)
+                  </span>
+                </div>
+                <div className="flex items-center justify-between gap-4 bg-surface-container-low px-space-md py-3">
+                  <span className="font-body text-label-caps uppercase tracking-wider text-on-surface-variant">
+                    Shelf Life
+                  </span>
+                  <span className="font-mono text-spec-mono font-medium text-cleanroom-navy">
+                    5 Years Guaranteed
                   </span>
                 </div>
               </div>
-            </Reveal>
 
-            <Reveal>
-              <h3 className="mb-3 font-heading text-headline-sm font-bold text-cleanroom-navy">
-                Available Variants
+              {/* Key features — compact chips, consistent with Variants below */}
+              <h3 className="mb-2.5 mt-space-md font-heading text-subheading uppercase tracking-wider text-primary">
+                Key Features
               </h3>
               <div className="flex flex-wrap gap-2">
-                {product.variants.map((v) => (
-                  <span key={v} className="spec-pill">
-                    {v}
+                {product.features.map((f) => (
+                  <span key={f} className="spec-pill">
+                    <Icon name="check_circle" className="text-primary text-[14px]" filled />
+                    {f}
                   </span>
                 ))}
               </div>
             </Reveal>
 
-            <Reveal delay={0.05}>
-              <h3 className="mb-3 font-heading text-headline-sm font-bold text-cleanroom-navy">
+            {/* Exploded diagram + variants */}
+            <div className="flex flex-col gap-space-md">
+              <Reveal>
+                <div className="overflow-hidden rounded-xl border border-cleanroom-navy/[0.06] bg-white shadow-level-1">
+                  <div className="relative aspect-[1000/440] w-full">
+                    <Image
+                      src={product.explodedImage}
+                      alt={`${product.name} — exploded component view`}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 42vw"
+                      className="object-contain p-3"
+                    />
+                  </div>
+                  <div className="flex items-center gap-1.5 border-t border-spec-border px-space-md py-2.5">
+                    <Icon name="view_in_ar" className="text-primary text-[16px]" />
+                    <span className="font-body text-label-caps uppercase tracking-wider text-on-surface-variant">
+                      Exploded Component View
+                    </span>
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal>
+                <h3 className="mb-2.5 font-heading text-subheading uppercase tracking-wider text-primary">
+                  Available Variants
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {product.variants.map((v) => (
+                    <span key={v} className="spec-pill">
+                      {v}
+                    </span>
+                  ))}
+                </div>
+              </Reveal>
+            </div>
+          </div>
+
+          {/* Applications / Packaging / Compliance — compact, balanced 3-up strip */}
+          <Stagger
+            className="mt-space-lg grid grid-cols-1 gap-space-sm sm:grid-cols-3"
+            stagger={0.08}
+          >
+            <StaggerItem className="rounded-xl border border-spec-border bg-white p-space-md">
+              <h3 className="mb-2.5 flex items-center gap-1.5 font-heading text-subheading uppercase tracking-wider text-primary">
+                <Icon name="science" className="text-[16px]" />
                 Clinical Applications
               </h3>
-              <ul className="flex flex-col gap-2">
+              <ul className="flex flex-col gap-1.5">
                 {product.applications.map((a) => (
-                  <li key={a} className="flex items-center gap-2 font-body text-body-md text-on-surface-variant">
-                    <Icon name="arrow_right" className="text-primary text-[18px]" />
+                  <li
+                    key={a}
+                    className="flex items-center gap-2 font-body text-body-sm text-on-surface-variant"
+                  >
+                    <Icon name="arrow_right" className="shrink-0 text-primary text-[16px]" />
                     {a}
                   </li>
                 ))}
               </ul>
-            </Reveal>
+            </StaggerItem>
 
-            <Reveal delay={0.1}>
-              <h3 className="mb-3 font-heading text-headline-sm font-bold text-cleanroom-navy">
+            <StaggerItem className="rounded-xl border border-spec-border bg-white p-space-md">
+              <h3 className="mb-2.5 flex items-center gap-1.5 font-heading text-subheading uppercase tracking-wider text-primary">
+                <Icon name="inventory_2" className="text-[16px]" />
                 Packaging
               </h3>
-              <ul className="flex flex-col gap-2">
+              <ul className="flex flex-col gap-1.5">
                 {product.packaging.map((p) => (
-                  <li key={p} className="flex items-center gap-2 font-body text-body-md text-on-surface-variant">
-                    <Icon name="inventory_2" className="text-primary text-[18px]" />
+                  <li
+                    key={p}
+                    className="flex items-center gap-2 font-body text-body-sm text-on-surface-variant"
+                  >
+                    <Icon name="inventory_2" className="shrink-0 text-primary text-[16px]" />
                     {p}
                   </li>
                 ))}
               </ul>
-            </Reveal>
+            </StaggerItem>
 
-            {/* Compliance card */}
-            <Reveal delay={0.15}>
-              <div className="rounded-xl bg-spec-code-bg/60 p-space-md ring-1 ring-primary/10">
-                <div className="mb-2 flex items-center gap-2">
-                  <Icon name="verified_user" className="text-primary text-[20px]" filled />
-                  <span className="font-heading text-subheading uppercase tracking-wider text-primary">
-                    Compliance
-                  </span>
-                </div>
-                <p className="font-body text-body-sm text-on-surface-variant">
-                  Manufactured to {product.iso} under an ISO 13485 quality system, ISO 10993
-                  biocompatibility evaluated, in a Class 10,000 cleanroom.
-                </p>
-                <a
-                  href="/docs/product-catalog.pdf"
-                  download
-                  className="mt-3 inline-flex items-center gap-1.5 font-heading text-subheading uppercase tracking-wider text-primary hover:gap-2.5 transition-all"
-                >
-                  <Icon name="download" className="text-[16px]" />
-                  Full Catalog
-                </a>
-              </div>
-            </Reveal>
-          </div>
+            <StaggerItem className="rounded-xl bg-spec-code-bg/60 p-space-md ring-1 ring-primary/10">
+              <h3 className="mb-2.5 flex items-center gap-1.5 font-heading text-subheading uppercase tracking-wider text-primary">
+                <Icon name="verified_user" className="text-[16px]" filled />
+                Compliance
+              </h3>
+              <p className="font-body text-body-sm text-on-surface-variant">
+                Manufactured to {product.iso} under an ISO 13485 quality system, ISO 10993
+                biocompatibility evaluated, in a Class 10,000 cleanroom.
+              </p>
+              <a
+                href="/docs/product-catalog.pdf"
+                download
+                className="mt-2.5 inline-flex items-center gap-1.5 font-heading text-subheading uppercase tracking-wider text-primary transition-all hover:gap-2.5"
+              >
+                <Icon name="download" className="text-[14px]" />
+                Full Catalog
+              </a>
+            </StaggerItem>
+          </Stagger>
         </div>
       </section>
 
