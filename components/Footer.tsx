@@ -42,6 +42,7 @@ export function Footer() {
                 src="/images/logo/smlogo-wt.svg"
                 alt="Sanan Manufacturing"
                 fill
+                unoptimized
                 sizes="150px"
                 className="object-contain object-left"
               />
